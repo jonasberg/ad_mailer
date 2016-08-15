@@ -8,6 +8,7 @@ url_mapper = {
     bo_poolen.REGEX_PATTERN: bo_poolen.BoPoolenScraper
 }
 
+#Gets url, maps it to a compatible scraper and returns the scraper class
 def get_scraper(url):
     for pattern in url_mapper.keys():
         if match(pattern,url):
