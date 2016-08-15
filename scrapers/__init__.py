@@ -13,3 +13,5 @@ def get_scraper(url):
     for pattern in url_mapper.keys():
         if match(pattern,url):
             return url_mapper[pattern]
+            
+    raise ValueError("Url {} not compatible with any scrapers".format(url))

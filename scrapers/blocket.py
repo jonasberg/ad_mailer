@@ -1,8 +1,8 @@
 # coding: utf-8
+import logging, logging.handlers
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import pickle
-import logging, logging.handlers
+from os.path import dirname,join
 
 #This variable is a regex which will match urls connected to this scraper
 REGEX_PATTERN = r'https?://(?:www|mobil)\.blocket\.se/.*'
@@ -11,18 +11,23 @@ REGEX_PATTERN = r'https?://(?:www|mobil)\.blocket\.se/.*'
 class BlocketScraper():
 	def __init__(self,url,**filters):
 		self.url = url
-		self.ad_ids = []
-		self.upper_price = upper_price
 		self.filters = filters
+		self.ad_ids = []
 
-	def pickle_dump(self):
-		with open('blocket_pickle.txt','wb') as f:
-			pickle.dump(self.ad_ids,f)
-		logging.info('Blocket Pickle Dump')
+	def dump_ids(self):
+		file_url = join(dirname(__file__),"blocket_ids.txt")
+		formatted_ads = map(lambda x: str(x)+"\n",self.ad_ids)
 
-	def pickle_load(self):
-		with open('blocket_pickle.txt','rb') as f:
-			return pickle.load(f)
+		with open(file_url,'a') as f:
+			f.writelines(formatted_ads)
+		self.ad_ids = []
+
+		logging.info('Blocket Id Dump')
+
+	def load_ids(self):
+		file_url = join(dirname(__file__),"blocket_ids.txt")
+		with open(file_url,'r') as f:
+			return map(lambda x: x.replace("\n",""),f.readlines())
 
 	def get_price(self,ad):
 		text = ad.find('span',{'class':'item_price'}).text
@@ -35,8 +40,8 @@ class BlocketScraper():
 
 	def is_good(self,ad):
 		criterias = [
-			self.get_id(ad) not in self.ad_ids,
-			self.get_price(ad) < self.upper_price
+			self.get_id(ad) not in self.load_ids(),
+			#self.get_price(ad) < self.upper_price
 		]
 		return False not in criterias
 
@@ -50,8 +55,6 @@ class BlocketScraper():
 		}
 
 	def scrape(self):
-		self.ad_ids = self.pickle_load()
-
 		with urlopen(self.url) as response:
 			r = response.read()
 		soup = BeautifulSoup(r, 'html.parser')
