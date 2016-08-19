@@ -29,7 +29,6 @@ def main():
 			for scraper in initialized_scrapers:
 				scraper.dump_ids()
 
-		break
 		logging.info('Hinernating for {} seconds'.format(str(settings.SLEEP_SECONDS)))
 		sleep(settings.SLEEP_SECONDS)
 

@@ -1,4 +1,5 @@
 private.py
+mylog.log
 __pycache__/
 scrapers/__pycache__/
 scrapers/*_ids.txt
