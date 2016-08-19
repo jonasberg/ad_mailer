@@ -1,4 +1,5 @@
 settings.py
+private.py
 __pycache__/
 scrapers/__pycache__/
 scrapers/*_ids.txt
