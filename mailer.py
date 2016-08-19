@@ -1,5 +1,5 @@
 # coding: utf-8
-import settings
+import private
 from email.mime.text import MIMEText
 import smtplib
 import logging, logging.handlers
@@ -16,19 +16,19 @@ def mail_ads(ads):
 	#Prepping email
 	msg = MIMEText(contents)
 	msg['Subject'] = subject
-	msg['To'] = settings.YOU
-	msg['From'] = settings.ME
+	msg['To'] = private.YOU
+	msg['From'] = private.ME
 
 	#Connecting to gmail
-	s = smtplib.SMTP(*settings.MAILHOST)
+	s = smtplib.SMTP(*private.MAILHOST)
 	s.ehlo()
 	s.starttls()
 	s.ehlo
-	s.login(settings.G_USER,settings.G_PW)
+	s.login(private.G_USER,private.G_PW)
 	logging.info('Connected to Gmail')
 
 	#Sending
-	s.sendmail(settings.ME,[settings.YOU],msg.as_string())
+	s.sendmail(private.ME,[private.YOU],msg.as_string())
 	logging.info('Mail Sent')
 	s.quit()
 

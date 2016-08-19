@@ -30,8 +30,8 @@ def main():
 				scraper.dump_ids()
 
 		break
-		logging.info('Hinernating for {} seconds'.format(str(SLEEP_SECONDS)))
-		sleep(SLEEP_SECONDS)
+		logging.info('Hinernating for {} seconds'.format(str(settings.SLEEP_SECONDS)))
+		sleep(settings.SLEEP_SECONDS)
 
 
 if __name__ == '__main__':
