@@ -1,12 +1,20 @@
 #General settings
-SLEEP_SECONDS = 60
+SLEEP_SECONDS = 300
 
 #Ads
 ads = {
-    "Blocket Apartment Lund": {
-        "url": 'http://mobil.blocket.se/bostad/uthyres/lagenheter/skane/lund',
+    #"Blocket Apartment Lund": {
+    #    "url": 'https://www.blocket.se/bostad/uthyres/lagenheter/skane/lund',
+    #    "filters": {
+    #        "min_price": 6000
+    #    }
+    #},
+
+    "Blocket Racer Skane": {
+        "url": 'https://www.blocket.se/lund?q=racer&cg=0&w=1&st=s&ca=23_10&is=1&l=0&md=th',
         "filters": {
-            "max_price": 4500
+            "min_price": 50,
+            "max_price": 1200
         }
     }
 }

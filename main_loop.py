@@ -30,6 +30,7 @@ def main():
 				scraper.dump_ids()
 
 		logging.info('Hinernating for {} seconds'.format(str(settings.SLEEP_SECONDS)))
+
 		sleep(settings.SLEEP_SECONDS)
 
 
